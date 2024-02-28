@@ -4,6 +4,14 @@
 
 @layer components {
   body {
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Inter", sans-serif;
+  }
+
+  h1 {
+    @apply text-4xl mb-8 font-semibold;
+  }
+
+  h2 {
+    @apply text-3xl;
   }
 }

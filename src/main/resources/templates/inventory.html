@@ -4,7 +4,11 @@
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <title>Inventory | SupplySpy</title>
   </head>
-  <body>
+  <body class="flex">
     <th:block th:insert="~{fragments/sidebar :: sidebar}"></th:block>
+    <main class="flex-grow p-8">
+      <h1>Inventory</h1>
+      <th:block th:insert="~{fragments/inventory/table :: table}"></th:block>
+    </main>
   </body>
 </html>
