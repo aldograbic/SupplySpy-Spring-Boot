@@ -7,15 +7,9 @@ Product catalog management (add, update, delete products)
 Inventory tracking (quantities, locations)
 Sales tracking (orders, invoices, customer details)
 Reporting (inventory levels, sales performance)
-2. Choose Your Technology Stack
-Decide on the technologies you'll use for the frontend, backend, and database. A popular and accessible stack for web apps includes:
 
-Frontend: React or Vue.js for a dynamic user interface
-Backend: Node.js with Express for server-side logic
-Database: MongoDB or PostgreSQL for storing data
 3. Design Your Application
 Sketch the UI/UX: Draw wireframes for your app’s interface, focusing on simplicity and user experience.
-Plan the Database Schema: Design your database structure, considering how to store products, inventory, sales, and customer information.
 4. Develop the Application
 Frontend Development: Start with building the user interface based on your wireframes. Implement forms for adding products, a dashboard for inventory and sales insights, and pages for managing orders and customer information.
 Backend Development: Develop the API endpoints needed to handle the business logic: CRUD (Create, Read, Update, Delete) operations for products, inventory management, order processing, and generating reports.
