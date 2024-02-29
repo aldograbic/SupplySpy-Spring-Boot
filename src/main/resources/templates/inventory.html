@@ -8,7 +8,33 @@
     <th:block th:insert="~{fragments/sidebar :: sidebar}"></th:block>
     <main class="flex-grow p-8">
       <h1>Inventory</h1>
+      <button
+        type="button"
+        class="btn-primary mb-8"
+        data-hs-overlay="#add-product-modal"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+        Add product
+      </button>
+      <th:block
+        th:insert="~{fragments/inventory/addProductModal :: addProductModal}"
+      ></th:block>
+
       <th:block th:insert="~{fragments/inventory/table :: table}"></th:block>
     </main>
+    <script th:src="@{/js/preline.js}"></script>
   </body>
 </html>
