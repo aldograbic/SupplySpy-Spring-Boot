@@ -8,6 +8,8 @@ public class Inventory {
     private int quantity;
     private String location;
     private Timestamp updatedAt;
+
+    private Product product;
     
     public Inventory() {
     }
@@ -56,5 +58,13 @@ public class Inventory {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
