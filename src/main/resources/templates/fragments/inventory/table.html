@@ -78,7 +78,7 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-              <tr>
+              <tr th:each="inventoryItem : ${inventory}">
                 <td class="py-3 ps-4">
                   <div class="flex items-center h-5">
                     <input
@@ -93,15 +93,16 @@
                 </td>
                 <td
                   class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                >
-                  John Brown
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                  45
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                  New York No. 1 Lake Park
-                </td>
+                  th:text="${inventoryItem.product.name}"
+                ></td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"
+                  th:text="${inventoryItem.quantity}"
+                ></td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"
+                  th:text="${inventoryItem.location}"
+                ></td>
                 <td
                   class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium"
                 >

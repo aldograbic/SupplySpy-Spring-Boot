@@ -2,13 +2,18 @@
 <html lang="en">
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
-    <title>SupplySpy</title>
+    <title>Dashboard | SupplySpy</title>
   </head>
-  <body>
-    <th:block
-      th:insert="~{fragments/dashboard/successLoginMessage :: successLoginMessage}"
-    ></th:block>
-
+  <body class="flex">
     <th:block th:insert="~{fragments/sidebar :: sidebar}"></th:block>
+    <main class="flex-grow px-8 py-6">
+      <th:block th:insert="~{fragments/navbar :: navbar}"></th:block>
+      <div class="relative">
+        <th:block
+          th:insert="~{fragments/dashboard/successLoginMessage :: successLoginMessage}"
+        ></th:block>
+        <h1 class="mt-4">Dashboard</h1>
+      </div>
+    </main>
   </body>
 </html>

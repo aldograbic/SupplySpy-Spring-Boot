@@ -34,12 +34,17 @@
           </svg>
         </button>
       </div>
-      <form action="" method="post">
+      <form
+        action="/insertInventory"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div class="p-4 overflow-y-auto">
           <label for="name" class="block text-sm font-medium mb-2">Name</label>
           <input
             type="text"
             id="name"
+            name="name"
             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-orange-400 focus:ring-orange-400 disabled:opacity-50 disabled:pointer-events-none"
             placeholder="Product name"
           />
@@ -50,6 +55,7 @@
           >
           <textarea
             id="description"
+            name="description"
             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm resize-none focus:border-orange-400 focus:ring-orange-400 disabled:opacity-50 disabled:pointer-events-none"
             placeholder="Product description"
             rows="5"
@@ -62,6 +68,7 @@
           <input
             type="text"
             id="location"
+            name="location"
             class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-orange-400 focus:ring-orange-400 disabled:opacity-50 disabled:pointer-events-none"
             placeholder="Product location"
           />
@@ -77,6 +84,7 @@
             <div class="w-full flex justify-between items-center gap-x-5">
               <input
                 id="price"
+                name="price"
                 class="w-full p-0 bg-transparent border-0 text-gray-800 focus:ring-0"
                 type="text"
                 value="1"
@@ -140,6 +148,7 @@
             <div class="w-full flex justify-between items-center gap-x-5">
               <input
                 id="quantity"
+                name="quantity"
                 class="w-full p-0 bg-transparent border-0 text-gray-800 focus:ring-0"
                 type="text"
                 value="1"
@@ -200,6 +209,7 @@
             type="file"
             name="image"
             id="image"
+            accept="image/png, image/jpeg"
             class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-orange-400 focus:ring-orange-400 disabled:opacity-50 disabled:pointer-events-none file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4"
           />
         </div>
@@ -211,7 +221,7 @@
           >
             Close
           </button>
-          <button type="button" class="btn-primary">Save changes</button>
+          <input type="submit" class="btn-primary" value="Save changes" />
         </div>
       </form>
     </div>

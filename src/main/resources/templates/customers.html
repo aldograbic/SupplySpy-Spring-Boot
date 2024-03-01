@@ -2,9 +2,15 @@
 <html lang="en">
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
-    <title>Suppliers | SupplySpy</title>
+    <title>Customers | SupplySpy</title>
   </head>
-  <body>
+  <body class="flex">
     <th:block th:insert="~{fragments/sidebar :: sidebar}"></th:block>
+    <main class="flex-grow px-8 py-6">
+      <th:block th:insert="~{fragments/navbar :: navbar}"></th:block>
+      <div class="relative">
+        <h1 class="mt-4">Customers</h1>
+      </div>
+    </main>
   </body>
 </html>

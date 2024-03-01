@@ -3,7 +3,6 @@ package com.project.SupplySpy.repositories.inventory;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -14,8 +13,11 @@ import com.project.SupplySpy.repositories.products.ProductRepository;
 
 public class InventoryRowMapper implements RowMapper<Inventory>{
 
-    @Autowired
     private ProductRepository productRepository;
+
+    public InventoryRowMapper(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     @Nullable
@@ -25,6 +27,7 @@ public class InventoryRowMapper implements RowMapper<Inventory>{
         inventory.setProductId(rs.getInt("product_id"));
         inventory.setQuantity(rs.getInt("quantity"));
         inventory.setLocation(rs.getString("location"));
+        inventory.setUserId(rs.getInt("user_id"));
         inventory.setUpdatedAt(rs.getTimestamp("updated_at"));
 
         int productId = rs.getInt("product_id");

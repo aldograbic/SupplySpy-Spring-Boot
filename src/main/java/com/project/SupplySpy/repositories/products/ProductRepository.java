@@ -4,4 +4,5 @@ import com.project.SupplySpy.classes.Product;
 
 public interface ProductRepository {
     Product getProductByProductId(int productId);
+    void insertProduct(Product product);
 }

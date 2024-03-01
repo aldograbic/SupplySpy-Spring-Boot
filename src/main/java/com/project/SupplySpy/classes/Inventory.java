@@ -7,6 +7,7 @@ public class Inventory {
     private int productId;
     private int quantity;
     private String location;
+    private int userId;
     private Timestamp updatedAt;
 
     private Product product;
@@ -14,10 +15,11 @@ public class Inventory {
     public Inventory() {
     }
 
-    public Inventory(int productId, int quantity, String location) {
+    public Inventory(int productId, int quantity, String location, int userId) {
         this.productId = productId;
         this.quantity = quantity;
         this.location = location;
+        this.userId = userId;
     }
 
     public int getInventoryId() {
@@ -50,6 +52,14 @@ public class Inventory {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public Timestamp getUpdatedAt() {

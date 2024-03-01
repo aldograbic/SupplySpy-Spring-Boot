@@ -6,4 +6,5 @@ import com.project.SupplySpy.classes.Inventory;
 
 public interface InventoryRepository {
     List<Inventory> getInventoryForUserByUserId(int userId);
+    void insertInventory(Inventory inventory);
 }
