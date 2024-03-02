@@ -27,7 +27,6 @@ public class InventoryRowMapper implements RowMapper<Inventory>{
         inventory.setProductId(rs.getInt("product_id"));
         inventory.setQuantity(rs.getInt("quantity"));
         inventory.setLocation(rs.getString("location"));
-        inventory.setUserId(rs.getInt("user_id"));
         inventory.setUpdatedAt(rs.getTimestamp("updated_at"));
 
         int productId = rs.getInt("product_id");

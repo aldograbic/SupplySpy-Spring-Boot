@@ -48,11 +48,11 @@ public class RegistrationController {
         
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
-
+        user.setApproved(false);
         userRepository.insertUser(user);
 
-        redirectAttributes.addFlashAttribute("successMessage", "Registration successful! You can now log in with your SupplySpy account.");
+        redirectAttributes.addFlashAttribute("successMessage", "Registration successful! Your account is pending approval. You will be able to log in once your account has been approved by a manager.");
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

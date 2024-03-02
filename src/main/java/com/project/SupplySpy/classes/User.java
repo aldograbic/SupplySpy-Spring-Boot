@@ -8,6 +8,7 @@ public class User {
     private String password;
     private String email;
     private String role;
+    private boolean isApproved;
     private Timestamp createdAt;
     
     public User() {
@@ -57,6 +58,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
     }
 
     public Timestamp getCreatedAt() {

@@ -5,6 +5,6 @@ import java.util.List;
 import com.project.SupplySpy.classes.Inventory;
 
 public interface InventoryRepository {
-    List<Inventory> getInventoryForUserByUserId(int userId);
+    List<Inventory> getInventory();
     void insertInventory(Inventory inventory);
 }

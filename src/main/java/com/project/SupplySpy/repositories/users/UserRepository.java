@@ -6,4 +6,5 @@ public interface UserRepository {
     User findByUsername(String username);
     User findByEmail(String email);
     void insertUser(User user);
+    void approveUserByUsername(String username);
 }

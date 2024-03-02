@@ -28,6 +28,10 @@ public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuc
             throw new UsernameNotFoundException("User not found.");
         }
 
+        if (!user.isApproved()) {
+            throw new UserNotApprovedException("User not approved by manager.");
+        }
+
         return new org.springframework.security.core.userdetails.User(
                 username,
                 user.getPassword(),

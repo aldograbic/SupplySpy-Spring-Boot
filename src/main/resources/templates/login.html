@@ -10,7 +10,10 @@
         th:insert="~{fragments/successMessage :: successMessage}"
       ></th:block>
       <th:block
-        th:insert="~{fragments/errorMessage :: errorMessage}"
+        th:insert="~{fragments/login/errorLoginMessage :: errorLoginMessage}"
+      ></th:block>
+      <th:block
+        th:insert="~{fragments/login/notApprovedLoginMessage :: notApprovedLoginMessage}"
       ></th:block>
       <div class="hidden md:block bg-gray-100 w-1/3 p-5">
         <a href="/dashboard">
