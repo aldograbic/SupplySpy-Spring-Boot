@@ -6,6 +6,12 @@
   </head>
   <body>
     <main class="flex min-h-screen">
+      <th:block
+        th:insert="~{fragments/successMessage :: successMessage}"
+      ></th:block>
+      <th:block
+        th:insert="~{fragments/errorMessage :: errorMessage}"
+      ></th:block>
       <div class="hidden md:block bg-gray-100 w-1/3 p-5">
         <a href="/dashboard">
           <img th:src="@{/img/logo.png}" alt="SupplySpy Logo" class="h-12" />
@@ -21,7 +27,7 @@
           <h3 class="px-4 text-sm text-gray-500">
             Master your inventory with intelligence and ease.
           </h3>
-          <form action="" method="post">
+          <form action="/login" method="post">
             <div class="p-4 overflow-y-auto">
               <label for="username" class="block text-sm font-medium mb-2"
                 >Username</label
@@ -30,6 +36,7 @@
                 type="text"
                 id="username"
                 name="username"
+                autocomplete="username"
                 required
                 class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-orange-400 focus:ring-orange-400 disabled:opacity-50 disabled:pointer-events-none"
               />
