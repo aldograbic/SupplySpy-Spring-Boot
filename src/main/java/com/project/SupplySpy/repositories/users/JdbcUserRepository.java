@@ -32,6 +32,13 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
+    public User findByUserId(int userId) {
+        String sql = "SELECT user_id, username, password, email, role, is_approved, created_at FROM users WHERE user_id = ?";
+        List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), userId);
+        return users.isEmpty() ? null : users.get(0);
+    }
+
+    @Override
     public List<User> findByRole(String role) {
         String sql = "SELECT user_id, username, password, email, role, is_approved, created_at FROM users WHERE role = ?";
         return jdbcTemplate.query(sql, new UserRowMapper(), role);
@@ -52,8 +59,8 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
-    public void approveUserByUsername(String username) {
-        String sql = "UPDATE users SET is_approved = true WHERE username = ?";
-        jdbcTemplate.update(sql, username);
+    public void approveUserByUserId(int userId) {
+        String sql = "UPDATE users SET is_approved = true WHERE user_id = ?";
+        jdbcTemplate.update(sql, userId);
     }
 }

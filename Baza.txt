@@ -12,6 +12,7 @@ CREATE TABLE notifications (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,
     message TEXT NOT NULL,
     status ENUM('UNREAD', 'READ') NOT NULL DEFAULT 'UNREAD',
+    type ENUM('REGISTRATION_APPROVAL','OTHER_NOTIFICATION_TYPE') NOT NULL,
     sender_id INT NOT NULL,
     receiver_id INT NOT NULL,
     CONSTRAINT fk_notifications_sender_id FOREIGN KEY (sender_id) REFERENCES users(user_id),

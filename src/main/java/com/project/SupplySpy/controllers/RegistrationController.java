@@ -68,6 +68,7 @@ public class RegistrationController {
             notification.setReceiverId(manager.getUserId());
             notification.setSenderId(user.getUserId());
             notification.setStatus("UNREAD");
+            notification.setType("REGISTRATION_APPROVAL");
             notificationRepository.insertNotification(notification);
         }
 

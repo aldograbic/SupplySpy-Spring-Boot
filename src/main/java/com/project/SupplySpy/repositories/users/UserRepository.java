@@ -7,7 +7,8 @@ import com.project.SupplySpy.classes.User;
 public interface UserRepository {
     User findByUsername(String username);
     User findByEmail(String email);
+    User findByUserId(int userId);
     List<User> findByRole(String role);
     void insertUser(User user);
-    void approveUserByUsername(String username);
+    void approveUserByUserId(int userId);
 }

@@ -9,6 +9,12 @@
     <main class="flex-grow px-8 py-6">
       <th:block th:insert="~{fragments/navbar :: navbar}"></th:block>
       <div class="relative">
+        <th:block
+          th:insert="~{fragments/successMessage :: successMessage}"
+        ></th:block>
+        <th:block
+          th:insert="~{fragments/errorMessage :: errorMessage}"
+        ></th:block>
         <h1 class="mt-4">Reports</h1>
       </div>
     </main>

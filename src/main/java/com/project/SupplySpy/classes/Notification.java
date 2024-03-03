@@ -4,14 +4,18 @@ public class Notification {
     private int notificationId;
     private String message;
     private String status;
+    private String type;
     private int senderId;
     private int receiverId;
 
+    private User sender;
+
     public Notification() {}
 
-    public Notification(String message, String status, int senderId, int receiverId) {
+    public Notification(String message, String status, String type, int senderId, int receiverId) {
         this.message = message;
         this.status = status;
+        this.type = type;
         this.senderId = senderId;
         this.receiverId = receiverId;
     }
@@ -40,6 +44,14 @@ public class Notification {
         this.status = status;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public int getSenderId() {
         return senderId;
     }
@@ -54,5 +66,13 @@ public class Notification {
 
     public void setReceiverId(int receiverId) {
         this.receiverId = receiverId;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 }
