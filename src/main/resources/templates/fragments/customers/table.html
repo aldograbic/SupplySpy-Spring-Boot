@@ -55,19 +55,25 @@
                   scope="col"
                   class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
                 >
-                  Product
+                  Name
                 </th>
                 <th
                   scope="col"
                   class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
                 >
-                  Quantity
+                  Email
                 </th>
                 <th
                   scope="col"
                   class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
                 >
-                  Location
+                  Phone
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                >
+                  Address
                 </th>
                 <th
                   scope="col"
@@ -78,15 +84,15 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-              <tr th:if="${inventory.isEmpty()}">
+              <tr th:if="${customers.isEmpty()}">
                 <td
                   colspan="6"
                   class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-center"
                 >
-                  No inventory records found.
+                  No customer records found.
                 </td>
               </tr>
-              <tr th:each="inventoryItem : ${inventory}">
+              <tr th:each="customer : ${customers}">
                 <td class="py-3 ps-4">
                   <div class="flex items-center h-5">
                     <input
@@ -102,15 +108,19 @@
 
                 <td
                   class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                  th:text="${inventoryItem.product.name}"
+                  th:text="${customer.name}"
                 ></td>
                 <td
                   class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"
-                  th:text="${inventoryItem.quantity}"
+                  th:text="${customer.email}"
                 ></td>
                 <td
                   class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"
-                  th:text="${inventoryItem.location}"
+                  th:text="${customer.phone}"
+                ></td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"
+                  th:text="${customer.address}"
                 ></td>
                 <td
                   class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium"
@@ -119,7 +129,7 @@
                     type="button"
                     class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-orange-400 hover:text-orange-600 disabled:opacity-50 disabled:pointer-events-none"
                   >
-                    Delete
+                    Edit
                   </button>
                 </td>
               </tr>
@@ -130,7 +140,7 @@
           <nav class="flex items-center space-x-1">
             <!-- Previous Button -->
             <a
-              th:href="@{/inventory(page=${currentPage - 1}, size=${size})}"
+              th:href="@{/customers(page=${currentPage - 1}, size=${size})}"
               th:if="${currentPage > 1}"
               class="p-2.5 inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50"
             >
@@ -140,7 +150,7 @@
             <!-- Page Numbers -->
             <div th:each="i : ${#numbers.sequence(1, totalPages)}">
               <a
-                th:href="@{/inventory(page=${i}, size=${size})}"
+                th:href="@{/customers(page=${i}, size=${size})}"
                 th:text="${i}"
                 class="min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2.5 text-sm rounded-full"
                 th:classappend="${currentPage == i} ? 'font-medium' : ''"
@@ -149,7 +159,7 @@
 
             <!-- Next Button -->
             <a
-              th:href="@{/inventory(page=${currentPage + 1}, size=${size})}"
+              th:href="@{/customers(page=${currentPage + 1}, size=${size})}"
               th:if="${currentPage < totalPages}"
               class="p-2.5 inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50"
             >

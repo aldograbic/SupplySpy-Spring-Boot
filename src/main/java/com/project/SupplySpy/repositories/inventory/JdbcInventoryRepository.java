@@ -19,14 +19,25 @@ public class JdbcInventoryRepository implements InventoryRepository{
     private ProductRepository productRepository;
 
     @Override
-    public List<Inventory> getInventory() {
-        String sql = "SELECT * FROM inventory INNER JOIN products ON inventory.product_id = products.product_id";
-        return jdbcTemplate.query(sql, new InventoryRowMapper(productRepository));
+    public List<Inventory> getInventory(int page, int size) {
+        String sql = "SELECT * FROM inventory INNER JOIN products ON inventory.product_id = products.product_id ORDER BY inventory.inventory_id ASC LIMIT ? OFFSET ?";
+        int offset = (page - 1) * size;
+        return jdbcTemplate.query(sql, new InventoryRowMapper(productRepository), new Object[]{size, offset});
     }
 
     @Override
     public void insertInventory(Inventory inventory) {
         String sql = "INSERT INTO inventory (product_id, quantity, location) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, inventory.getProductId(), inventory.getQuantity(), inventory.getLocation());
+    }
+
+    @Override
+    public int getTotalInventoryCount() {
+        String sql = "SELECT COUNT(*) FROM inventory";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
+        if (count == null) {
+            return 0;
+        }
+        return count;
     }
 }

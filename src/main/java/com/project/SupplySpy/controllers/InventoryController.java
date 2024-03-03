@@ -27,10 +27,18 @@ public class InventoryController {
     private ProductRepository productRepository;
     
     @GetMapping("/inventory")
-    public String getInventoryPage(Model model) {
+    public String getInventoryPage(Model model,
+                                @RequestParam(name = "page", defaultValue = "1") int page,
+                                @RequestParam(name = "size", defaultValue = "10") int size) {
 
-        List<Inventory> inventory = inventoryRepository.getInventory();
+        List<Inventory> inventory = inventoryRepository.getInventory(page, size);
         model.addAttribute("inventory", inventory);
+
+        int totalItems = inventoryRepository.getTotalInventoryCount();
+        int totalPages = (int) Math.ceil((double) totalItems / size);
+        totalPages = Math.max(totalPages, 1);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", page);
 
         return "inventory";
     }

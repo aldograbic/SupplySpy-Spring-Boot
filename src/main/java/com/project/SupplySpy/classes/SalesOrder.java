@@ -7,6 +7,8 @@ public class SalesOrder {
     private int customerId;
     private Timestamp orderDate;
     private String status;
+
+    private Customer customer;
     
     public SalesOrder() {
     }
@@ -45,5 +47,13 @@ public class SalesOrder {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
