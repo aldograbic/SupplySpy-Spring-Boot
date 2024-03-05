@@ -73,7 +73,7 @@
                   scope="col"
                   class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"
                 >
-                  Action
+                  Actions
                 </th>
               </tr>
             </thead>
@@ -86,7 +86,7 @@
                   No inventory records found.
                 </td>
               </tr>
-              <tr th:each="inventoryItem : ${inventory}">
+              <tr th:each="inventoryItem, iterStat : ${inventory}">
                 <td class="py-3 ps-4">
                   <div class="flex items-center h-5">
                     <input
@@ -113,22 +113,36 @@
                   th:text="${inventoryItem.location}"
                 ></td>
                 <td
-                  class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium"
+                  class="px-6 py-4 space-x-2 whitespace-nowrap text-end text-sm font-medium"
                 >
                   <button
                     type="button"
+                    th:data-hs-overlay="'#update-inventory-modal-' + ${inventoryItem.inventoryId}"
+                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-orange-400 hover:text-orange-600 disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    sec:authorize="hasRole('MANAGER')"
+                    th:data-hs-overlay="'#delete-inventory-modal-' + ${inventoryItem.inventoryId}"
                     class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-orange-400 hover:text-orange-600 disabled:opacity-50 disabled:pointer-events-none"
                   >
                     Delete
                   </button>
                 </td>
+                <th:block
+                  th:insert="~{fragments/inventory/deleteInventoryModal :: deleteInventoryModal (${inventoryItem.inventoryId})}"
+                ></th:block>
+                <th:block
+                  th:insert="~{fragments/inventory/updateInventoryModal :: updateInventoryModal (${inventoryItem.inventoryId})}"
+                ></th:block>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="py-1 px-4">
           <nav class="flex items-center space-x-1">
-            <!-- Previous Button -->
             <a
               th:href="@{/inventory(page=${currentPage - 1}, size=${size})}"
               th:if="${currentPage > 1}"
@@ -136,8 +150,6 @@
             >
               « <span class="sr-only">Previous</span>
             </a>
-
-            <!-- Page Numbers -->
             <div th:each="i : ${#numbers.sequence(1, totalPages)}">
               <a
                 th:href="@{/inventory(page=${i}, size=${size})}"
@@ -146,8 +158,6 @@
                 th:classappend="${currentPage == i} ? 'font-medium' : ''"
               ></a>
             </div>
-
-            <!-- Next Button -->
             <a
               th:href="@{/inventory(page=${currentPage + 1}, size=${size})}"
               th:if="${currentPage < totalPages}"

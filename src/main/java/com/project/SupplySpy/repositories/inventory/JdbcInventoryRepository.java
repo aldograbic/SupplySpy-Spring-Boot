@@ -40,4 +40,16 @@ public class JdbcInventoryRepository implements InventoryRepository{
         }
         return count;
     }
+
+    @Override
+    public void updateInventory(Inventory inventory) {
+        String sql = "UPDATE inventory SET quantity = ?, location = ? WHERE inventory_id = ?";
+        jdbcTemplate.update(sql, inventory.getQuantity(), inventory.getLocation(), inventory.getInventoryId());
+    }
+
+    @Override
+    public void deleteInventory(Inventory inventory) {
+        String sql = "DELETE FROM inventory WHERE inventory_id = ?";
+        jdbcTemplate.update(sql, inventory.getInventoryId());
+    }
 }

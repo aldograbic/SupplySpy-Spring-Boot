@@ -127,18 +127,21 @@
                 >
                   <button
                     type="button"
+                    th:data-hs-overlay="'#update-customer-modal-' + ${customer.customerId}"
                     class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-orange-400 hover:text-orange-600 disabled:opacity-50 disabled:pointer-events-none"
                   >
                     Edit
                   </button>
                 </td>
+                <th:block
+                  th:insert="~{fragments/customers/updateCustomerModal :: updateCustomerModal (${customer.customerId})}"
+                ></th:block>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="py-1 px-4">
           <nav class="flex items-center space-x-1">
-            <!-- Previous Button -->
             <a
               th:href="@{/customers(page=${currentPage - 1}, size=${size})}"
               th:if="${currentPage > 1}"
@@ -146,8 +149,6 @@
             >
               « <span class="sr-only">Previous</span>
             </a>
-
-            <!-- Page Numbers -->
             <div th:each="i : ${#numbers.sequence(1, totalPages)}">
               <a
                 th:href="@{/customers(page=${i}, size=${size})}"
@@ -156,8 +157,6 @@
                 th:classappend="${currentPage == i} ? 'font-medium' : ''"
               ></a>
             </div>
-
-            <!-- Next Button -->
             <a
               th:href="@{/customers(page=${currentPage + 1}, size=${size})}"
               th:if="${currentPage < totalPages}"

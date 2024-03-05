@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .disable()))
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
-                .requestMatchers("/login", "/registration").anonymous()
+                .requestMatchers("/", "/login", "/registration").anonymous()
                 .requestMatchers("/dashboard", "/inventory", "/reports", "/orders").hasAnyRole("MANAGER", "STAFF")
                 .requestMatchers("/customers").hasRole("MANAGER")
                 .anyRequest().authenticated()

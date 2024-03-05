@@ -37,4 +37,10 @@ public class JdbcCustomerRepository implements CustomerRepository{
         List<Customer> customers = jdbcTemplate.query(sql, new CustomerRowMapper(), customerId);
         return customers.isEmpty() ? null : customers.get(0);
     }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        String sql = "UPDATE customers SET name = ?, email = ?, phone = ?, address = ? WHERE customer_id = ?";
+        jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getPhone(), customer.getAddress(), customer.getCustomerId());
+    }
 }

@@ -34,4 +34,11 @@ public class JdbcSalesOrderRepository implements SalesOrderRepository{
         }
         return count;
     }
+
+    @Override
+    public SalesOrder findSalesOrderByOrderId(int orderId) {
+        String sql = "SELECT * FROM sales_orders WHERE order_id = ?";
+        List<SalesOrder> salesOrders = jdbcTemplate.query(sql, new SalesOrderRowMapper(customerRepository), orderId);
+        return salesOrders.isEmpty() ? null : salesOrders.get(0);
+    }
 }

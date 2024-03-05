@@ -8,6 +8,9 @@ public class OrderItem {
     private int productId;
     private int quantity;
     private BigDecimal price;
+
+    private SalesOrder salesOrder;
+    private Product product;
     
     public OrderItem() {
     }
@@ -57,5 +60,21 @@ public class OrderItem {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public SalesOrder getSalesOrder() {
+        return salesOrder;
+    }
+
+    public void setSalesOrder(SalesOrder salesOrder) {
+        this.salesOrder = salesOrder;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <title>Order details | SupplySpy</title>
+  </head>
+  <body class="flex">
+    <th:block th:insert="~{fragments/sidebar :: sidebar}"></th:block>
+    <main class="flex-grow px-8 py-6">
+      <th:block th:insert="~{fragments/navbar :: navbar}"></th:block>
+      <div class="relative">
+        <th:block
+          th:insert="~{fragments/successMessage :: successMessage}"
+        ></th:block>
+        <th:block
+          th:insert="~{fragments/errorMessage :: errorMessage}"
+        ></th:block>
+        <div class="mt-4 flex justify-between items-center">
+          <h1>Order details</h1>
+          <a href="#" class="btn-primary">
+            <svg
+              class="flex-shrink-0 size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 6 2 18 2 18 9" />
+              <path
+                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              />
+              <rect width="12" height="8" x="6" y="14" />
+            </svg>
+            Print
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-3">
+          <div>
+            <div class="grid space-y-3">
+              <dl class="grid sm:flex gap-x-3 text-sm">
+                <dt class="min-w-36 max-w-[200px] text-gray-500">Billed to:</dt>
+                <dd class="text-gray-800">
+                  <a
+                    class="inline-flex items-center gap-x-1.5 text-orange-400 hover:underline font-medium"
+                    href="#"
+                    th:text="${salesOrder.customer.email}"
+                  >
+                  </a>
+                </dd>
+              </dl>
+
+              <dl class="grid sm:flex gap-x-3 text-sm">
+                <dt class="min-w-36 max-w-[200px] text-gray-500">
+                  Shipping details:
+                </dt>
+                <dd class="font-medium text-gray-800">
+                  <span
+                    class="block font-semibold"
+                    th:text="${salesOrder.customer.name}"
+                  ></span>
+                  <address
+                    class="not-italic font-normal"
+                    th:text="${salesOrder.customer.address}"
+                  ></address>
+                </dd>
+              </dl>
+            </div>
+          </div>
+
+          <div>
+            <div class="grid space-y-3">
+              <dl class="grid sm:flex gap-x-3 text-sm">
+                <dt class="min-w-36 max-w-[200px] text-gray-500">
+                  Order number:
+                </dt>
+                <dd class="font-medium text-gray-800">ADUQ2189H1-0038</dd>
+              </dl>
+
+              <dl class="grid sm:flex gap-x-3 text-sm">
+                <dt class="min-w-36 max-w-[200px] text-gray-500">Currency:</dt>
+                <dd class="font-medium text-gray-800">USD - US Dollar</dd>
+              </dl>
+
+              <dl class="grid sm:flex gap-x-3 text-sm">
+                <dt class="min-w-36 max-w-[200px] text-gray-500">
+                  Order date:
+                </dt>
+                <dd
+                  class="font-medium text-gray-800"
+                  th:text="${#dates.format(salesOrder.orderDate, 'dd.MM.yyyy. HH:mm')}"
+                ></dd>
+              </dl>
+
+              <dl class="grid sm:flex gap-x-3 text-sm">
+                <dt class="min-w-36 max-w-[200px] text-gray-500">
+                  Payment method:
+                </dt>
+                <dd class="font-medium text-gray-800">Credit card</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 border border-gray-200 p-4 rounded-lg space-y-4">
+          <div class="hidden sm:grid sm:grid-cols-5">
+            <div
+              class="sm:col-span-2 text-xs font-medium text-gray-500 uppercase"
+            >
+              Product
+            </div>
+            <div class="text-start text-xs font-medium text-gray-500 uppercase">
+              Quantity
+            </div>
+            <div class="text-start text-xs font-medium text-gray-500 uppercase">
+              Price
+            </div>
+            <div class="text-end text-xs font-medium text-gray-500 uppercase">
+              Amount
+            </div>
+          </div>
+
+          <div class="hidden sm:block border-b border-gray-200"></div>
+          <div
+            th:each="orderItem : ${orderItems}"
+            class="grid grid-cols-3 sm:grid-cols-5 gap-2"
+          >
+            <div class="col-span-full sm:col-span-2">
+              <h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase">
+                Product
+              </h5>
+              <p
+                class="font-medium text-gray-800"
+                th:text="${orderItem.product.name}"
+              ></p>
+            </div>
+            <div>
+              <h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase">
+                Quantity
+              </h5>
+              <p class="text-gray-800" th:text="${orderItem.quantity}"></p>
+            </div>
+            <div>
+              <h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase">
+                Price
+              </h5>
+              <p class="text-gray-800" th:text="${'€' + orderItem.price}"></p>
+            </div>
+            <div>
+              <h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase">
+                Amount
+              </h5>
+              <p
+                class="sm:text-end text-gray-800"
+                th:text="${'€' + orderItem.price * orderItem.quantity}"
+              ></p>
+            </div>
+          </div>
+          <div class="sm:hidden border-b border-gray-200"></div>
+        </div>
+        <div class="mt-8 flex sm:justify-end">
+          <div class="w-full max-w-2xl sm:text-end space-y-2">
+            <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
+              <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                <dt class="col-span-3 text-gray-500">Total:</dt>
+                <dd class="col-span-2 font-medium text-gray-800">$2750.00</dd>
+              </dl>
+              <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                <dt class="col-span-3 text-gray-500">Tax:</dt>
+                <dd class="col-span-2 font-medium text-gray-800">$39.00</dd>
+              </dl>
+              <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
+                <dt class="col-span-3 text-gray-500">Amount paid:</dt>
+                <dd class="col-span-2 font-medium text-gray-800">$2789.00</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

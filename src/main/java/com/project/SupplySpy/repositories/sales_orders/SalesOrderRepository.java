@@ -7,4 +7,5 @@ import com.project.SupplySpy.classes.SalesOrder;
 public interface SalesOrderRepository {
     List<SalesOrder> getSalesOrders(int page, int size);
     int getTotalSalesOrdersCount();
+    SalesOrder findSalesOrderByOrderId(int orderId);
 }

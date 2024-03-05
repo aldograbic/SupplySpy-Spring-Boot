@@ -8,4 +8,6 @@ public interface InventoryRepository {
     List<Inventory> getInventory(int page, int size);
     void insertInventory(Inventory inventory);
     int getTotalInventoryCount();
+    void updateInventory(Inventory inventory);
+    void deleteInventory(Inventory inventory);
 }

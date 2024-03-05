@@ -8,4 +8,5 @@ public interface CustomerRepository {
     List<Customer> getCustomers(int page, int size);
     int getTotalCustomersCount();
     Customer findByCustomerId(int customerId);
+    void updateCustomer(Customer customer);
 }
