@@ -8,4 +8,5 @@ public interface SalesOrderRepository {
     List<SalesOrder> getSalesOrders(int page, int size);
     int getTotalSalesOrdersCount();
     SalesOrder findSalesOrderByOrderId(int orderId);
+    void insertSalesOrder(SalesOrder salesOrder);
 }

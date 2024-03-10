@@ -7,6 +7,7 @@ public class SalesOrder {
     private int customerId;
     private Timestamp orderDate;
     private String status;
+    private String paymentType;
 
     private Customer customer;
     
@@ -55,5 +56,13 @@ public class SalesOrder {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 }

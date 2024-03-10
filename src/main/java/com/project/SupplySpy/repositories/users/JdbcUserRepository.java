@@ -63,4 +63,22 @@ public class JdbcUserRepository implements UserRepository{
         String sql = "UPDATE users SET is_approved = true WHERE user_id = ?";
         jdbcTemplate.update(sql, userId);
     }
+
+    @Override
+    public void updateUser(User user) {
+        String sql = "UPDATE users SET username = ?, email = ? WHERE user_id = ?";
+        jdbcTemplate.update(sql, user.getUsername(), user.getEmail(), user.getUserId());
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        jdbcTemplate.update(sql, user.getUserId());
+    }
+    
+    @Override
+    public void updatePassword(User user) {
+        String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+        jdbcTemplate.update(sql, user.getPassword(), user.getUserId());
+    }
 }

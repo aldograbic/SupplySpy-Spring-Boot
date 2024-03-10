@@ -51,6 +51,7 @@ CREATE TABLE sales_orders (
     customer_id INT NOT NULL,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status ENUM('PENDING', 'COMPLETED', 'CANCELLED') NOT NULL DEFAULT 'PENDING',
+    payment_type ENUM('CREDIT_CARD', 'CASH') NOT NULL DEFAULT 'CASH',
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 

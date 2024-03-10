@@ -92,15 +92,17 @@
                   No order records found.
                 </td>
               </tr>
-              <tr th:each="order : ${salesOrders}">
+              <tr th:each="order, iterStat : ${salesOrders}">
                 <td class="py-3 ps-4">
                   <div class="flex items-center h-5">
                     <input
-                      id="hs-table-pagination-checkbox-1"
+                      th:id="${'hs-table-pagination-checkbox-' + iterStat.index}"
                       type="checkbox"
                       class="border-gray-200 rounded text-orange-400 focus:ring-orange-400"
                     />
-                    <label for="hs-table-pagination-checkbox-1" class="sr-only"
+                    <label
+                      th:for="${'hs-table-pagination-checkbox-' + iterStat.index}"
+                      class="sr-only"
                       >Checkbox</label
                     >
                   </div>

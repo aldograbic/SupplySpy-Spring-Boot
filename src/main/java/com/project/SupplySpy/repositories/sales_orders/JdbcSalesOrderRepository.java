@@ -1,9 +1,12 @@
 package com.project.SupplySpy.repositories.sales_orders;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.project.SupplySpy.classes.SalesOrder;
@@ -40,5 +43,17 @@ public class JdbcSalesOrderRepository implements SalesOrderRepository{
         String sql = "SELECT * FROM sales_orders WHERE order_id = ?";
         List<SalesOrder> salesOrders = jdbcTemplate.query(sql, new SalesOrderRowMapper(customerRepository), orderId);
         return salesOrders.isEmpty() ? null : salesOrders.get(0);
+    }
+
+    @SuppressWarnings("null")
+    @Override
+    public void insertSalesOrder(SalesOrder salesOrder) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO sales_orders (customer_id) VALUES (?)", new String[]{"order_id"});
+            ps.setInt(1, salesOrder.getCustomerId());
+            return ps;
+        }, keyHolder);
+        salesOrder.setOrderId(keyHolder.getKey().intValue());
     }
 }

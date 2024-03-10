@@ -46,12 +46,10 @@
               <dl class="grid sm:flex gap-x-3 text-sm">
                 <dt class="min-w-36 max-w-[200px] text-gray-500">Billed to:</dt>
                 <dd class="text-gray-800">
-                  <a
-                    class="inline-flex items-center gap-x-1.5 text-orange-400 hover:underline font-medium"
-                    href="#"
+                  <p
+                    class="inline-flex items-center gap-x-1.5 text-orange-400 font-medium"
                     th:text="${salesOrder.customer.email}"
-                  >
-                  </a>
+                  ></p>
                 </dd>
               </dl>
 
@@ -76,15 +74,16 @@
           <div>
             <div class="grid space-y-3">
               <dl class="grid sm:flex gap-x-3 text-sm">
-                <dt class="min-w-36 max-w-[200px] text-gray-500">
-                  Order number:
-                </dt>
-                <dd class="font-medium text-gray-800">ADUQ2189H1-0038</dd>
+                <dt class="min-w-36 max-w-[200px] text-gray-500">Order ID:</dt>
+                <dd
+                  class="font-medium text-gray-800"
+                  th:text="${salesOrder.orderId}"
+                ></dd>
               </dl>
 
               <dl class="grid sm:flex gap-x-3 text-sm">
                 <dt class="min-w-36 max-w-[200px] text-gray-500">Currency:</dt>
-                <dd class="font-medium text-gray-800">USD - US Dollar</dd>
+                <dd class="font-medium text-gray-800">EUR - Euro</dd>
               </dl>
 
               <dl class="grid sm:flex gap-x-3 text-sm">
@@ -101,7 +100,18 @@
                 <dt class="min-w-36 max-w-[200px] text-gray-500">
                   Payment method:
                 </dt>
-                <dd class="font-medium text-gray-800">Credit card</dd>
+                <dd
+                  th:if="${salesOrder.paymentType == 'CREDIT_CARD'}"
+                  class="font-medium text-gray-800"
+                >
+                  Credit card
+                </dd>
+                <dd
+                  th:if="${salesOrder.paymentType == 'CASH'}"
+                  class="font-medium text-gray-800"
+                >
+                  Cash
+                </dd>
               </dl>
             </div>
           </div>
@@ -128,7 +138,7 @@
           <div class="hidden sm:block border-b border-gray-200"></div>
           <div
             th:each="orderItem : ${orderItems}"
-            class="grid grid-cols-3 sm:grid-cols-5 gap-2"
+            class="grid grid-cols-3 sm:grid-cols-5"
           >
             <div class="col-span-full sm:col-span-2">
               <h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase">
@@ -168,15 +178,24 @@
             <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
               <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                 <dt class="col-span-3 text-gray-500">Total:</dt>
-                <dd class="col-span-2 font-medium text-gray-800">$2750.00</dd>
+                <dd
+                  class="col-span-2 font-medium text-gray-800"
+                  th:text="${'€' + priceTotal}"
+                ></dd>
               </dl>
               <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                 <dt class="col-span-3 text-gray-500">Tax:</dt>
-                <dd class="col-span-2 font-medium text-gray-800">$39.00</dd>
+                <dd
+                  class="col-span-2 font-medium text-gray-800"
+                  th:text="${'€' + #numbers.formatDecimal(priceTax, 1, 'COMMA', 2, 'POINT')}"
+                ></dd>
               </dl>
               <dl class="grid sm:grid-cols-5 gap-x-3 text-sm">
                 <dt class="col-span-3 text-gray-500">Amount paid:</dt>
-                <dd class="col-span-2 font-medium text-gray-800">$2789.00</dd>
+                <dd
+                  class="col-span-2 font-medium text-gray-800"
+                  th:text="${'€' + #numbers.formatDecimal(priceAmountPaid, 1, 'COMMA', 2, 'POINT')}"
+                ></dd>
               </dl>
             </div>
           </div>

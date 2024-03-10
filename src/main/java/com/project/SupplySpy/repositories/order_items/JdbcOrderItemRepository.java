@@ -27,4 +27,10 @@ public class JdbcOrderItemRepository implements OrderItemRepository{
         String sql = "SELECT order_item_id, order_id, product_id, quantity, price FROM order_items WHERE order_id = ?";
         return jdbcTemplate.query(sql, new OrderItemRowMapper(salesOrderRepository, productRepository), orderId);
     }
+
+    @Override
+    public void insertOrderItem(OrderItem orderItem) {
+        String sql = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, orderItem.getOrderId(), orderItem.getProductId(), orderItem.getQuantity(), orderItem.getPrice());
+    }
 }

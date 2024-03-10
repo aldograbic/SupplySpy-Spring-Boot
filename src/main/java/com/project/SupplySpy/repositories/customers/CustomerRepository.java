@@ -9,4 +9,5 @@ public interface CustomerRepository {
     int getTotalCustomersCount();
     Customer findByCustomerId(int customerId);
     void updateCustomer(Customer customer);
+    void insertCustomer(Customer customer);
 }

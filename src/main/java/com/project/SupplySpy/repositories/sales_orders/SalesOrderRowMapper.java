@@ -27,6 +27,7 @@ public class SalesOrderRowMapper implements RowMapper<SalesOrder> {
         salesOrder.setCustomerId(rs.getInt("customer_id"));
         salesOrder.setOrderDate(rs.getTimestamp("order_date"));
         salesOrder.setStatus(rs.getString("status"));
+        salesOrder.setPaymentType(rs.getString("payment_type"));
 
         int customerId = rs.getInt("customer_id");
         Customer customer = customerRepository.findByCustomerId(customerId);

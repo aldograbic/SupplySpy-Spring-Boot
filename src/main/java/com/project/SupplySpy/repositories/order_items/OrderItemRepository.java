@@ -6,4 +6,5 @@ import com.project.SupplySpy.classes.OrderItem;
 
 public interface OrderItemRepository {
     List<OrderItem> getOrderItemsForOrderByOrderId(int orderId);
+    void insertOrderItem(OrderItem orderItem);
 }

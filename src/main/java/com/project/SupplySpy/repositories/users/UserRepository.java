@@ -11,4 +11,7 @@ public interface UserRepository {
     List<User> findByRole(String role);
     void insertUser(User user);
     void approveUserByUserId(int userId);
+    void updateUser(User user);
+    void deleteUser(User user);
+    void updatePassword(User user);
 }
