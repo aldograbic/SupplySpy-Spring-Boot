@@ -80,6 +80,18 @@
                                     <include>preline.js</include>
                                 </includes>
                             </resource>
+							<resource>
+                                <directory>node_modules/lodash</directory>
+                                <includes>
+                                    <include>lodash.min.js</include>
+                                </includes>
+                            </resource>
+							<resource>
+                                <directory>node_modules/apexcharts/dist</directory>
+                                <includes>
+                                    <include>apexcharts.min.js</include>
+                                </includes>
+                            </resource>
                         </resources>
                     </configuration>
                 </execution>

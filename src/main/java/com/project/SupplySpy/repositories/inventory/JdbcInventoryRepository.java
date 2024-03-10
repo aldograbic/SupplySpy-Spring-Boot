@@ -42,6 +42,16 @@ public class JdbcInventoryRepository implements InventoryRepository{
     }
 
     @Override
+    public int getNoQuantityInventoryCount() {
+        String sql = "SELECT COUNT(*) FROM inventory WHERE quantity = 0";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
+        if (count == null) {
+            return 0;
+        }
+        return count;
+    }
+
+    @Override
     public void updateInventory(Inventory inventory) {
         String sql = "UPDATE inventory SET quantity = ?, location = ? WHERE inventory_id = ?";
         jdbcTemplate.update(sql, inventory.getQuantity(), inventory.getLocation(), inventory.getInventoryId());

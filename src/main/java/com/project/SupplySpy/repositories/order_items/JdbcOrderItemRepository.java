@@ -1,5 +1,6 @@
 package com.project.SupplySpy.repositories.order_items;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,12 @@ public class JdbcOrderItemRepository implements OrderItemRepository{
     public void insertOrderItem(OrderItem orderItem) {
         String sql = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, orderItem.getOrderId(), orderItem.getProductId(), orderItem.getQuantity(), orderItem.getPrice());
+    }
+
+    @Override
+    public BigDecimal getTotalRevenue() {
+        String sql = "SELECT SUM(quantity * price) FROM order_items INNER JOIN sales_orders ON order_items.order_id = sales_orders.order_id WHERE status = 'COMPLETED'";
+        BigDecimal totalRevenue = jdbcTemplate.queryForObject(sql, BigDecimal.class);
+        return totalRevenue == null ? BigDecimal.ZERO : totalRevenue;
     }
 }

@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@preline/dropdown": "^2.0.2",
+    "apexcharts": "^3.47.0",
+    "lodash": "^4.17.21",
     "preline": "^2.0.3"
   }
 }

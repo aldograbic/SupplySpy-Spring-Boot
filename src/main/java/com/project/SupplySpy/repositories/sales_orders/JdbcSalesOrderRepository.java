@@ -39,6 +39,16 @@ public class JdbcSalesOrderRepository implements SalesOrderRepository{
     }
 
     @Override
+    public int getCompletedSalesOrdersCount() {
+        String sql = "SELECT COUNT(*) FROM sales_orders WHERE status = 'Completed'";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
+        if (count == null) {
+            return 0;
+        }
+        return count;
+    }
+
+    @Override
     public SalesOrder findSalesOrderByOrderId(int orderId) {
         String sql = "SELECT * FROM sales_orders WHERE order_id = ?";
         List<SalesOrder> salesOrders = jdbcTemplate.query(sql, new SalesOrderRowMapper(customerRepository), orderId);

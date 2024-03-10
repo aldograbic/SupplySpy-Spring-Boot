@@ -3,6 +3,13 @@
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <title>Dashboard | SupplySpy</title>
+    <script
+      src="https://preline.co/assets/js/hs-apexcharts-helpers.js"
+      defer="defer"
+    ></script>
+    <script th:src="@{/js/lodash.min.js}" defer="defer"></script>
+    <script th:src="@{/js/apexcharts.min.js}" defer="defer"></script>
+    <script th:src="@{/js/charts.js}" defer="defer"></script>
   </head>
   <body class="flex">
     <th:block th:insert="~{fragments/sidebar :: sidebar}"></th:block>
@@ -13,6 +20,36 @@
           th:insert="~{fragments/dashboard/successLoginMessage :: successLoginMessage}"
         ></th:block>
         <h1 class="mt-4">Dashboard</h1>
+        <th:block
+          th:insert="~{fragments/dashboard/statsSection :: statsSection}"
+        ></th:block>
+        <div class="grid sm:grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mt-24">
+          <div id="hs-single-line-chart" class="col-span-2"></div>
+          <div class="flex flex-col justify-center items-center">
+            <div id="hs-doughnut-chart"></div>
+
+            <div
+              class="flex justify-center sm:justify-end items-center gap-x-4 mt-3 sm:mt-6"
+            >
+              <div class="inline-flex items-center">
+                <span
+                  class="size-2.5 inline-block bg-orange-400 rounded-sm me-2"
+                ></span>
+                <span class="text-[13px] text-gray-600 dark:text-neutral-400">
+                  Credit card
+                </span>
+              </div>
+              <div class="inline-flex items-center">
+                <span
+                  class="size-2.5 inline-block bg-cyan-500 rounded-sm me-2"
+                ></span>
+                <span class="text-[13px] text-gray-600 dark:text-neutral-400">
+                  Cash
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </body>
