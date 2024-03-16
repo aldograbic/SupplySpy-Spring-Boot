@@ -46,4 +46,54 @@
       </div>
     </main>
   </body>
+  <script>
+    function fetchSearchResults() {
+      const query = document.getElementById("searchInput").value;
+      fetch("/inventory/search?query=" + query)
+        .then((response) => response.json())
+        .then((data) => {
+          const searchResultsDiv = document.getElementById("searchResults");
+          searchResultsDiv.innerHTML = "";
+          data.forEach((item) => {
+            searchResultsDiv.innerHTML += `
+              <tr>
+                <td class="py-3 ps-4">
+                  <div class="flex items-center h-5">
+                    <input
+                      type="checkbox"
+                      class="border-gray-200 rounded text-orange-400 focus:ring-orange-400"
+                    />
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">${item.product.name}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${item.quantity}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${item.location}</td>
+                <td class="px-6 py-4 space-x-2 whitespace-nowrap text-end text-sm font-medium">
+                  <button
+                    type="button"
+                    th:data-hs-overlay="#update-inventory-modal-${item.inventoryId}"
+                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-orange-400 hover:text-orange-600 disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    sec:authorize="hasRole('MANAGER')"
+                    th:data-hs-overlay="#delete-inventory-modal-${item.inventoryId}"
+                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-orange-400 hover:text-orange-600 disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    Delete
+                  </button>
+                </td>
+                <th:block th:insert="~{fragments/inventory/deleteInventoryModal :: deleteInventoryModal (${item.inventoryId})}"></th:block>
+                <th:block th:insert="~{fragments/inventory/updateInventoryModal :: updateInventoryModal (${item.inventoryId})}"></th:block>
+              </tr>
+            `;
+          });
+        })
+        .catch((error) =>
+          console.error("Error fetching search results:", error)
+        );
+    }
+  </script>
 </html>

@@ -8,9 +8,11 @@
             <input
               type="text"
               name="hs-table-with-pagination-search"
-              id="hs-table-with-pagination-search"
+              id="searchInput"
               class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-orange-400 focus:ring-orange-400 disabled:opacity-50 disabled:pointer-events-none"
               placeholder="Search for items"
+              x-data="{ query: '' }"
+              x-on:input.debounce.300ms="query = $event.target.value; fetchSearchResults()"
             />
             <div
               class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3"
@@ -77,7 +79,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody id="searchResults" class="divide-y divide-gray-200">
               <tr th:if="${inventory.isEmpty()}">
                 <td
                   colspan="6"

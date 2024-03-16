@@ -85,7 +85,7 @@ public class OrdersController {
 
     @PostMapping("/insertOrder")
     @Transactional
-    public String insertOrder(@ModelAttribute Customer customer, @RequestParam List<OrderItem> orderItems, RedirectAttributes redirectAttributes) {
+    public String insertOrder(@ModelAttribute Customer customer, @RequestParam List<Inventory> inventory, RedirectAttributes redirectAttributes) {
 
         try {
             customerRepository.insertCustomer(customer);
@@ -93,7 +93,13 @@ public class OrdersController {
             SalesOrder salesOrder = new SalesOrder(customer.getCustomerId());
             salesOrderRepository.insertSalesOrder(salesOrder);
 
-            for (OrderItem orderItem : orderItems) {
+            for (Inventory inventoryItem : inventory) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.setOrderId(salesOrder.getOrderId());
+                orderItem.setProductId(inventoryItem.getProductId());
+                orderItem.setQuantity(inventoryItem.getQuantity());
+                orderItem.setPrice(inventoryItem.getProduct().getPrice());
+                
                 orderItemRepository.insertOrderItem(orderItem);
             }
             

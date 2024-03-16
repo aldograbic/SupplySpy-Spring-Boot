@@ -1,7 +1,9 @@
 package com.project.SupplySpy.repositories.sales_orders;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -65,5 +67,25 @@ public class JdbcSalesOrderRepository implements SalesOrderRepository{
             return ps;
         }, keyHolder);
         salesOrder.setOrderId(keyHolder.getKey().intValue());
+    }
+
+    @Override
+    public List<Map<String, Object>> getSalesOrdersLastFiveWeeks() {
+        String sql = "SELECT DATE_FORMAT(order_date, '%Y-%u') AS week_start, COUNT(*) AS order_count " +
+        "FROM sales_orders " +
+        "WHERE order_date >= CURDATE() - INTERVAL 5 WEEK GROUP BY week_start ORDER BY week_start ASC";
+        return jdbcTemplate.queryForList(sql);
+    }
+
+    @Override
+    public BigDecimal findMaxPayment() {
+    String sql = "SELECT MAX(total_payment) as max_payment " +
+                 "FROM ( " +
+                 "    SELECT o.order_id, SUM(oi.price * oi.quantity) AS total_payment " +
+                 "    FROM sales_orders o " +
+                 "    JOIN order_items oi ON o.order_id = oi.order_id " +
+                 "    GROUP BY o.order_id " +
+                 ") AS order_payments;";
+        return jdbcTemplate.queryForObject(sql, BigDecimal.class);
     }
 }

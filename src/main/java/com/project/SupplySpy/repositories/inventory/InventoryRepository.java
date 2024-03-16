@@ -11,4 +11,5 @@ public interface InventoryRepository {
     int getNoQuantityInventoryCount();
     void updateInventory(Inventory inventory);
     void deleteInventory(Inventory inventory);
+    List<Inventory> searchInventory(String query);
 }

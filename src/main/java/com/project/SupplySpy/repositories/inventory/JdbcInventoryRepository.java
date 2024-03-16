@@ -62,4 +62,11 @@ public class JdbcInventoryRepository implements InventoryRepository{
         String sql = "DELETE FROM inventory WHERE inventory_id = ?";
         jdbcTemplate.update(sql, inventory.getInventoryId());
     }
+
+    @Override
+    public List<Inventory> searchInventory(String query) {
+        String sql = "SELECT * FROM inventory INNER JOIN products ON inventory.product_id = products.product_id " +
+                     "WHERE products.name LIKE ?";
+        return jdbcTemplate.query(sql, new InventoryRowMapper(productRepository), "%" + query + "%");
+    }
 }
