@@ -40,8 +40,8 @@ public class OrdersController {
     
     @GetMapping("/orders")
     public String getOrdersPage(Model model,
-                                @RequestParam(name = "page", defaultValue = "1") int page,
-                                @RequestParam(name = "size", defaultValue = "10") int size) {
+                                @RequestParam(defaultValue = "1") int page,
+                                @RequestParam(defaultValue = "10") int size) {
 
         List<SalesOrder> salesOrders = salesOrderRepository.getSalesOrders(page, size);
         model.addAttribute("salesOrders", salesOrders);
@@ -59,7 +59,7 @@ public class OrdersController {
     }
 
     @GetMapping("/orders/{orderId}")
-    public String getOrderDetailsPage(@PathVariable("orderId") int orderId,
+    public String getOrderDetailsPage(@PathVariable int orderId,
                                     Model model) {
 
         SalesOrder salesOrder = salesOrderRepository.findSalesOrderByOrderId(orderId);

@@ -22,8 +22,8 @@ public class CustomersController {
     
     @GetMapping("/customers")
     public String getCustomersPage(Model model,
-                                @RequestParam(name = "page", defaultValue = "1") int page,
-                                @RequestParam(name = "size", defaultValue = "10") int size) {
+                                @RequestParam(defaultValue = "1") int page,
+                                @RequestParam(defaultValue = "10") int size) {
 
         List<Customer> customers = customerRepository.getCustomers(page, size);
         model.addAttribute("customers", customers);

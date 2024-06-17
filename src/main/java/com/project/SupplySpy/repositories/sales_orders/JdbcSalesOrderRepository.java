@@ -57,7 +57,6 @@ public class JdbcSalesOrderRepository implements SalesOrderRepository{
         return salesOrders.isEmpty() ? null : salesOrders.get(0);
     }
 
-    @SuppressWarnings("null")
     @Override
     public void insertSalesOrder(SalesOrder salesOrder) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -71,21 +70,25 @@ public class JdbcSalesOrderRepository implements SalesOrderRepository{
 
     @Override
     public List<Map<String, Object>> getSalesOrdersLastFiveWeeks() {
-        String sql = "SELECT DATE_FORMAT(order_date, '%Y-%u') AS week_start, COUNT(*) AS order_count " +
-        "FROM sales_orders " +
-        "WHERE order_date >= CURDATE() - INTERVAL 5 WEEK GROUP BY week_start ORDER BY week_start ASC";
+        String sql = """
+        SELECT DATE_FORMAT(order_date, '%Y-%u') AS week_start, COUNT(*) AS order_count \
+        FROM sales_orders \
+        WHERE order_date >= CURDATE() - INTERVAL 5 WEEK GROUP BY week_start ORDER BY week_start ASC\
+        """;
         return jdbcTemplate.queryForList(sql);
     }
 
     @Override
     public BigDecimal findMaxPayment() {
-    String sql = "SELECT MAX(total_payment) as max_payment " +
-                 "FROM ( " +
-                 "    SELECT o.order_id, SUM(oi.price * oi.quantity) AS total_payment " +
-                 "    FROM sales_orders o " +
-                 "    JOIN order_items oi ON o.order_id = oi.order_id " +
-                 "    GROUP BY o.order_id " +
-                 ") AS order_payments;";
+    String sql = """
+                 SELECT MAX(total_payment) as max_payment \
+                 FROM ( \
+                     SELECT o.order_id, SUM(oi.price * oi.quantity) AS total_payment \
+                     FROM sales_orders o \
+                     JOIN order_items oi ON o.order_id = oi.order_id \
+                     GROUP BY o.order_id \
+                 ) AS order_payments;\
+                 """;
         return jdbcTemplate.queryForObject(sql, BigDecimal.class);
     }
 }

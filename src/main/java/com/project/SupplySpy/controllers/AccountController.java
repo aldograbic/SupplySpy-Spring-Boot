@@ -53,7 +53,7 @@ public class AccountController {
     }
 
     @PostMapping("/updatePassword")
-    public String updatePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword ,RedirectAttributes redirectAttributes) {
+    public String updatePassword(@RequestParam String currentPassword, @RequestParam String newPassword ,RedirectAttributes redirectAttributes) {
         User user = getAuthUser();
 
         String encryptedCurrentPassword = passwordEncoder.encode(currentPassword);

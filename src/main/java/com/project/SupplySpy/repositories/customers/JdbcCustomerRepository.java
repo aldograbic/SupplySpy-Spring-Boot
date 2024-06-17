@@ -47,7 +47,6 @@ public class JdbcCustomerRepository implements CustomerRepository{
         jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getPhone(), customer.getAddress(), customer.getCustomerId());
     }
 
-    @SuppressWarnings("null")
     @Override
     public void insertCustomer(Customer customer) {
         KeyHolder keyHolder = new GeneratedKeyHolder();

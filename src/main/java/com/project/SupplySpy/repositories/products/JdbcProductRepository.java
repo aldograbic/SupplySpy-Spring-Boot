@@ -27,7 +27,6 @@ public class JdbcProductRepository implements ProductRepository{
         }
     }
 
-    @SuppressWarnings("null")
     @Override
     public void insertProduct(Product product) {
         KeyHolder keyHolder = new GeneratedKeyHolder();

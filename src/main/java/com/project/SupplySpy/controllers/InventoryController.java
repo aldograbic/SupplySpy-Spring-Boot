@@ -31,8 +31,8 @@ public class InventoryController {
     
     @GetMapping("/inventory")
     public String getInventoryPage(Model model,
-                                @RequestParam(name = "page", defaultValue = "1") int page,
-                                @RequestParam(name = "size", defaultValue = "10") int size) {
+                                @RequestParam(defaultValue = "1") int page,
+                                @RequestParam(defaultValue = "10") int size) {
 
         List<Inventory> inventory = inventoryRepository.getInventory(page, size);
         model.addAttribute("inventory", inventory);
@@ -47,19 +47,19 @@ public class InventoryController {
     }
 
     @GetMapping("/inventory/search")
-    public ResponseEntity<List<Inventory>> searchInventory(@RequestParam("query") String query) {
+    public ResponseEntity<List<Inventory>> searchInventory(@RequestParam String query) {
         List<Inventory> searchResults = inventoryRepository.searchInventory(query);
         return ResponseEntity.ok().body(searchResults);
     }
 
     @PostMapping("/insertInventory")
     @Transactional
-    public String insertInventory(@RequestParam("name") String name, 
-                                  @RequestParam("description") String description, 
-                                  @RequestParam("image") MultipartFile image,
-                                  @RequestParam("price") BigDecimal price, 
-                                  @RequestParam("location") String location, 
-                                  @RequestParam("quantity") int quantity,
+    public String insertInventory(@RequestParam String name, 
+                                  @RequestParam String description, 
+                                  @RequestParam MultipartFile image,
+                                  @RequestParam BigDecimal price, 
+                                  @RequestParam String location, 
+                                  @RequestParam int quantity,
                                   RedirectAttributes redirectAttributes) {
 
         try {

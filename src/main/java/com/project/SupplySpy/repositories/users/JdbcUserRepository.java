@@ -45,7 +45,6 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     @Override
-    @SuppressWarnings("null")
     public void insertUser(User user) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {

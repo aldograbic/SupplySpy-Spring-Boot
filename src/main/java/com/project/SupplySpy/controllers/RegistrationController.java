@@ -36,7 +36,7 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     @Transactional
-    public String processRegistration(@ModelAttribute User user, @RequestParam("confirmPassword") String confirmPassword ,RedirectAttributes redirectAttributes) {
+    public String processRegistration(@ModelAttribute User user, @RequestParam String confirmPassword ,RedirectAttributes redirectAttributes) {
 
         User existingUserUsername = userRepository.findByUsername(user.getUsername());
         if (existingUserUsername != null) {
