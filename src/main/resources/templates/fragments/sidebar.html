@@ -108,9 +108,10 @@
           </ul>
           <ul class="space-y-1">
             <li>
-              <a
-                href="#"
-                class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-orange-400 pr-6"
+              <button
+                data-hs-overlay="#settings-modal"
+                type="button"
+                class="relative flex w-full flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-orange-400 pr-6"
               >
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg
@@ -137,8 +138,12 @@
                 <span class="ml-2 text-sm tracking-wide truncate"
                   >Settings</span
                 >
-              </a>
+              </button>
+              <th:block
+                th:insert="~{fragments/settingsModal :: settingsModal}"
+              ></th:block>
             </li>
+
             <li>
               <a
                 href="/logout"
